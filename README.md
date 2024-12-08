@@ -11,14 +11,48 @@ Welcome to **Abhinav's** repository for the **GeeksForGeeks Problem of the Day (
 - **Repository Name:** `GeeksForGeeks-POTD`
 - **Languages Used:** C++/Python.
 - **Structure:** Solutions are organized by **year**, **month**, and **problem name**.
+
+- # Problem: Example Problem
+
+## Problem Statement:
+Given two integers `a` and `b`, return their sum.
+
+---
+
+## Approach:
+1. Take input for `a` and `b`.
+2. Add the two numbers.
+3. Return the result.
+
+---
+
+## Code:
+```cpp
+#include <iostream>
+using namespace std;
+
+int main() {
+    int a, b;
+    cin >> a >> b;
+    cout << a + b << endl;
+    return 0;
+}
+
 - **Difficulty Levels:** Easy, Medium, Hard.
 
 ---
 
 ## 📜 Folder Structure
 
+GeeksForGeeks-POTD/
+├── README.md
+├── 2024/
+│   ├── January/
+│   │   ├── Problem-Name.md
+│   │   ├── Problem-Name.cpp (or .py)
+│   ├── February/
 
----
+
 
 ---
 
