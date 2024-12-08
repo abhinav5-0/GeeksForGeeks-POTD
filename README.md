@@ -9,7 +9,7 @@ Welcome to **Abhinav's** repository for the **GeeksForGeeks Problem of the Day (
 ## 📂 Repository Overview
 
 - **Repository Name:** `GeeksForGeeks-POTD`
-- **Languages Used:** C++/Python (or mention your preferred language).
+- **Languages Used:** C++/Python.
 - **Structure:** Solutions are organized by **year**, **month**, and **problem name**.
 - **Difficulty Levels:** Easy, Medium, Hard.
 
