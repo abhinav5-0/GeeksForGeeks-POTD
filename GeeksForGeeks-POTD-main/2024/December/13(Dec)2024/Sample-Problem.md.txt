@@ -1,0 +1,155 @@
+
+# Sorted and Rotated Minimum
+
+## Problem Statement
+
+You are given a sorted array `arr[]` that has been rotated at some unknown point. The task is to find the minimum element in this rotated array.
+
+The array may contain duplicates, and the minimum element could be the only element or multiple elements in case of duplicates.
+
+Write a function `findMin` that takes the rotated sorted array and returns the minimum element.
+
+### Example 1:
+
+**Input:**
+```cpp
+arr[] = [5, 6, 1, 2, 3, 4]
+```
+
+**Output:**
+```cpp
+1
+```
+
+**Explanation:**
+The array has been rotated at index 2, and the minimum element is 1.
+
+### Example 2:
+
+**Input:**
+```cpp
+arr[] = [3, 2, 2, 2]
+```
+
+**Output:**
+```cpp
+2
+```
+
+**Explanation:**
+The minimum element is 2 in this array.
+
+### Example 3:
+
+**Input:**
+```cpp
+arr[] = [4, 4, 4]
+```
+
+**Output:**
+```cpp
+4
+```
+
+**Explanation:**
+The array contains duplicates, but all elements are the same, so the minimum element is 4.
+
+## Constraints
+
+- 1 ≤ arr.size() ≤ 10^6
+- 1 ≤ arr[i] ≤ 10^9
+
+## Solution
+
+You can solve this problem using a binary search approach. Here's how you can do it:
+
+- Start with two pointers: `low = 0` and `high = arr.size() - 1`.
+- Iterate while `low < high`. Calculate the mid point: `mid = low + (high - low) / 2`.
+- If `arr[mid] < arr[high]`, this means the minimum element is in the left half, so set `high = mid`.
+- If `arr[mid] > arr[high]`, this means the minimum element is in the right half, so set `low = mid + 1`.
+- If `arr[mid] == arr[high]`, decrement `high` because we cannot determine the side that contains the minimum element with certainty.
+- Finally, return `arr[low]`, as it holds the minimum element.
+
+### Code
+
+```cpp
+class Solution {
+  public:
+    int findMin(vector<int>& arr) {
+        int low = 0, high = arr.size() - 1;
+
+        while (low < high) {
+            int mid = low + (high - low) / 2;
+
+            if (arr[mid] < arr[high]) {
+                high = mid;
+            } else if (arr[mid] > arr[high]) {
+                low = mid + 1;
+            } else {
+                high--;
+            }
+        }
+
+        return arr[low];
+    }
+};
+```
+
+### Time Complexity
+
+- **Time Complexity:** O(log n) — The binary search ensures that the problem is solved in logarithmic time.
+- **Space Complexity:** O(1) — The algorithm uses constant space.
+
+## How to Run
+
+To test the solution, you can run the following code:
+
+```cpp
+int main() {
+    string ts;
+    getline(cin, ts);
+    int t = stoi(ts);
+
+    Solution ob;
+    while (t--) {
+        string line;
+        getline(cin, line);
+        stringstream ss(line);
+        vector<int> nums;
+        int num;
+        while (ss >> num) {
+            nums.push_back(num);
+        }
+        cout << ob.findMin(nums) << endl;
+        cout << "~" << endl;
+    }
+    return 0;
+}
+```
+
+### Input Format
+- First line contains an integer `t` — the number of test cases.
+- For each test case, the second line contains the space-separated integers representing the array `arr[]`.
+
+### Output Format
+- For each test case, output the minimum element of the rotated sorted array.
+
+## Example
+
+### Input:
+```txt
+3
+5 6 1 2 3 4
+3 2 2 2
+4 4 4
+```
+
+### Output:
+```txt
+1
+2
+4
+```
+```
+
+This `sample-problem.md` file includes the problem statement, solution approach, example input/output, and the code that can be tested.
