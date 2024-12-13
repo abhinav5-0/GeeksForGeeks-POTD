@@ -1,0 +1,123 @@
+# Search in Rotated Sorted Array
+
+## Problem Statement
+Given a sorted and rotated array `arr[]` of distinct elements, the task is to find the index of a target `key`. Return `-1` if the key is not found.
+
+### Examples
+
+**Example 1:**
+
+Input: arr[] = [5, 6, 7, 8, 9, 10, 1, 2, 3], key = 3
+Output: 8
+Explanation: 3 is found at index 8.
+```
+
+**Example 2:**
+
+Input: arr[] = [3, 5, 1, 2], key = 6
+Output: -1
+Explanation: There is no element with value 6.
+```
+
+**Example 3:**
+
+Input: arr[] = [33, 42, 72, 99], key = 42
+Output: 1
+Explanation: 42 is found at index 1.
+```
+
+Constraints:
+1 ≤ arr.size() ≤ 10^6
+0 ≤ arr[i] ≤ 10^6
+1 ≤ key ≤ 10^6
+---
+
+## Solution Approach
+
+### Logic
+- Use binary search to efficiently find the target `key`.
+- Identify the sorted half of the array in each iteration and decide whether to search in the sorted or unsorted half.
+
+### Steps
+1. Initialize pointers `left` and `right` to the start and end of the array.
+2. Compute the middle index `mid`.
+3. Check if `arr[mid] == key`. If yes, return `mid`.
+4. Determine if the left or right half is sorted:
+   - If `arr[left] <= arr[mid]`, the left half is sorted.
+   - If `key` lies in the range `[arr[left], arr[mid])`, search in the left half; otherwise, search in the right half.
+   - If the left half is not sorted, the right half must be sorted.
+   - If `key` lies in the range `(arr[mid], arr[right]]`, search in the right half; otherwise, search in the left half.
+5. Repeat until the target is found or `left > right`.
+6. Return `-1` if the target is not found.
+
+### Complexity
+- **Time Complexity:** \(O(\log n)\), leveraging binary search.
+- **Space Complexity:** \(O(1)\), as no extra space is used.
+
+---
+
+## Code
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+class Solution {
+  public:
+    int search(vector<int>& arr, int key) {
+        int left = 0, right = arr.size() - 1;
+
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+
+            if (arr[mid] == key) {
+                return mid;
+            }
+
+            if (arr[left] <= arr[mid]) {
+                if (key >= arr[left] && key < arr[mid]) {
+                    right = mid - 1;
+                } else {
+                    left = mid + 1;
+                }
+            } else {
+                if (key > arr[mid] && key <= arr[right]) {
+                    left = mid + 1;
+                } else {
+                    right = mid - 1;
+                }
+            }
+        }
+
+        return -1;
+    }
+};
+
+int main() {
+    int t;
+    cin >> t;
+    while (t--) {
+        cin.ignore();
+        vector<int> arr;
+        string input;
+        getline(cin, input);
+        stringstream ss(input);
+        int number;
+        while (ss >> number) {
+            arr.push_back(number);
+        }
+        int key;
+        cin >> key;
+        Solution ob;
+        cout << ob.search(arr, key) << endl;
+        cout << "~" << endl;
+    }
+    return 0;
+}
+```
+
+---
+
+## Edge Cases
+1. Array with a single element.
+2. Target not present in the array.
+3. Array is not rotated (regular sorted array).
