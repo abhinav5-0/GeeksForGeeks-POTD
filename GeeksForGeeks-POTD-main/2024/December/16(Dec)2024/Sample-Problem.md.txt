@@ -1,0 +1,158 @@
+# K-th Element of Two Arrays
+
+## Problem Statement
+Given two sorted arrays `a[]` and `b[]` and an integer `k`, find the element that would be at the k-th position of the combined sorted array of `a` and `b` without actually merging the arrays.
+
+### Example 1:
+**Input:**
+```
+a[] = [2, 3, 6, 7, 9]
+b[] = [1, 4, 8, 10]
+k = 5
+```
+**Output:**
+```
+6
+```
+**Explanation:**
+The combined sorted array is `[1, 2, 3, 4, 6, 7, 8, 9, 10]`. The 5th element is `6`.
+
+### Example 2:
+**Input:**
+```
+a[] = [100, 112, 256, 349, 770]
+b[] = [72, 86, 113, 119, 265, 445, 892]
+k = 7
+```
+**Output:**
+```
+256
+```
+**Explanation:**
+The combined sorted array is `[72, 86, 100, 112, 113, 119, 256, 265, 349, 445, 770, 892]`. The 7th element is `256`.
+
+### Constraints:
+- `1 <= a.size(), b.size() <= 10^6`
+- `1 <= k <= a.size() + b.size()`
+- `0 <= a[i], b[i] < 10^8`
+
+## Approach
+### Key Idea:
+Find the k-th element without merging the arrays using **binary search**.
+
+### Steps:
+1. Always perform binary search on the smaller array to reduce computation.
+2. Partition the arrays into two halves:
+   - `cutA`: Elements taken from array `a`.
+   - `cutB = k - cutA`: Elements taken from array `b`.
+3. Define boundary elements:
+   - `leftA = (cutA == 0) ? INT_MIN : a[cutA - 1]`
+   - `rightA = (cutA == a.size()) ? INT_MAX : a[cutA]`
+   - Similarly for `b`.
+4. Check partition validity:
+   - If `leftA <= rightB` and `leftB <= rightA`, return `max(leftA, leftB)`.
+   - Otherwise, adjust `cutA`:
+     - If `leftA > rightB`, move `cutA` left.
+     - If `leftB > rightA`, move `cutA` right.
+5. Handle edge cases with `INT_MIN` and `INT_MAX` for out-of-bound elements.
+
+### Complexity:
+- **Time Complexity:** `O(log(min(n, m)))`, where `n` and `m` are the sizes of the arrays.
+- **Space Complexity:** `O(1)`.
+
+## Pseudocode
+```python
+function kthElement(a, b, k):
+    if size of a > size of b:
+        swap a and b
+
+    low = max(0, k - size of b)
+    high = min(k, size of a)
+
+    while low <= high:
+        cutA = (low + high) // 2
+        cutB = k - cutA
+
+        leftA = INT_MIN if cutA == 0 else a[cutA - 1]
+        rightA = INT_MAX if cutA == size of a else a[cutA]
+
+        leftB = INT_MIN if cutB == 0 else b[cutB - 1]
+        rightB = INT_MAX if cutB == size of b else b[cutB]
+
+        if leftA <= rightB and leftB <= rightA:
+            return max(leftA, leftB)
+        elif leftA > rightB:
+            high = cutA - 1
+        else:
+            low = cutA + 1
+
+    return -1
+```
+
+## Code Implementation (C++)
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+class Solution {
+  public:
+    int kthElement(vector<int>& a, vector<int>& b, int k) {
+        int n = a.size();
+        int m = b.size();
+        
+        if (n > m) return kthElement(b, a, k);
+        
+        int low = max(0, k - m), high = min(k, n);
+        
+        while (low <= high) {
+            int cutA = (low + high) / 2;
+            int cutB = k - cutA;
+            
+            int leftA = (cutA == 0) ? INT_MIN : a[cutA - 1];
+            int leftB = (cutB == 0) ? INT_MIN : b[cutB - 1];
+            int rightA = (cutA == n) ? INT_MAX : a[cutA];
+            int rightB = (cutB == m) ? INT_MAX : b[cutB];
+            
+            if (leftA <= rightB && leftB <= rightA) {
+                return max(leftA, leftB);
+            } else if (leftA > rightB) {
+                high = cutA - 1;
+            } else {
+                low = cutA + 1;
+            }
+        }
+        return -1;
+    }
+};
+
+int main() {
+    int t;
+    cin >> t;
+    cin.ignore();
+    while (t--) {
+        int n, m, k;
+        cin >> k;
+        cin.ignore();
+        string input;
+        int num;
+        vector<int> a, b;
+
+        getline(cin, input);
+        stringstream s2(input);
+        while (s2 >> num) {
+            a.push_back(num);
+        }
+
+        getline(cin, input);
+        stringstream s3(input);
+        while (s3 >> num) {
+            b.push_back(num);
+        }
+
+        Solution ob;
+        cout << ob.kthElement(a, b, k) << endl;
+    }
+    return 0;
+}
+```
+
