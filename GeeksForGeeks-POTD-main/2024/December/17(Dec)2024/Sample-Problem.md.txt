@@ -1,0 +1,141 @@
+# Aggressive Cows Problem
+
+## Problem Statement
+You are given an array `stalls[]` (containing unique elements) that denotes the positions of stalls. You are also given an integer `k`, which denotes the number of aggressive cows. The task is to assign stalls to the cows such that the minimum distance between any two cows is maximized.
+
+---
+
+### Examples
+
+#### Example 1:
+Input:
+```
+stalls = [1, 2, 4, 8, 9]
+k = 3
+```
+Output:
+```
+3
+```
+Explanation:
+- Place the first cow at stall 1, the second cow at stall 4, and the third cow at stall 8.
+- The minimum distance between any two cows is 3.
+
+#### Example 2:
+Input:
+```
+stalls = [10, 1, 2, 7, 5]
+k = 3
+```
+Output:
+```
+4
+```
+Explanation:
+- Place the first cow at stall 1, the second cow at stall 5, and the third cow at stall 10.
+- The minimum distance between any two cows is 4.
+
+#### Example 3:
+Input:
+```
+stalls = [2, 12, 11, 3, 26, 7]
+k = 5
+```
+Output:
+```
+1
+```
+Explanation:
+- Place each cow in one of the stalls as the number of stalls equals the number of cows.
+- The minimum distance is 1.
+
+---
+
+### Constraints
+- 2 ≤ `stalls.size()` ≤ 10⁶
+- 0 ≤ `stalls[i]` ≤ 10⁸
+- 1 ≤ `k` ≤ `stalls.size()`
+
+---
+
+## Approach
+
+1. **Sort the Stalls:**
+   - Arrange the stalls in ascending order to calculate distances between consecutive stalls.
+
+2. **Binary Search on Distance:**
+   - Use binary search to find the largest minimum distance (`mid`) that can be maintained between the cows.
+   - The search range is between `1` and `max(stalls) - min(stalls)`.
+
+3. **Feasibility Check:**
+   - For a given `mid`, place the cows greedily:
+     - Place the first cow in the first stall.
+     - For each subsequent stall, place the next cow only if the distance from the last placed cow is at least `mid`.
+   - If all cows can be placed, `mid` is feasible.
+
+4. **Update Search Range:**
+   - If `mid` is feasible, increase the search range (`low = mid + 1`) to find a larger distance.
+   - Otherwise, reduce the search range (`high = mid - 1`).
+
+5. **Result:**
+   - The largest feasible `mid` is the maximum minimum distance.
+
+---
+
+## Complexity
+
+- **Sorting:** O(n \* log n), where `n` is the size of `stalls`.
+- **Binary Search:** O(log(max\_distance)) iterations.
+- **Placement Feasibility Check:** O(n) per binary search iteration.
+
+Total complexity: **O(n \* log n + n \* log(max\_distance))**.
+
+---
+
+## Implementation (C++)
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+class Solution {
+public:
+    int aggressiveCows(vector<int> &stalls, int k) {
+        sort(stalls.begin(), stalls.end());
+        int low = 1, high = stalls.back() - stalls.front(), result = 0;
+
+        while (low <= high) {
+            int mid = low + (high - low) / 2;
+            if (canPlaceCows(stalls, k, mid)) {
+                result = mid;
+                low = mid + 1;
+            } else {
+                high = mid - 1;
+            }
+        }
+        return result;
+    }
+
+private:
+    bool canPlaceCows(vector<int> &stalls, int k, int dist) {
+        int count = 1, last_position = stalls[0];
+        for (int i = 1; i < stalls.size(); i++) {
+            if (stalls[i] - last_position >= dist) {
+                count++;
+                last_position = stalls[i];
+                if (count == k) return true;
+            }
+        }
+        return false;
+    }
+};
+
+int main() {
+    vector<int> stalls = {1, 2, 4, 8, 9};
+    int k = 3;
+    Solution sol;
+    cout << sol.aggressiveCows(stalls, k) << endl;
+    return 0;
+}
+```
+
