@@ -1,0 +1,155 @@
+# Book Allocation Problem
+
+## Problem Statement
+
+You are given an array `arr[]` of size `n`, where `arr[i]` represents the number of pages in the \(i^{th}\) book. There are `k` students, and the task is to allocate books to these students such that:
+
+1. Each student gets at least one book.
+2. The maximum number of pages assigned to any student is minimized.
+
+If it is not possible to allocate books satisfying the above conditions, return `-1`.
+
+### Input
+- **`arr[]`**: An array of integers, where each integer represents the number of pages in a book.
+- **`k`**: An integer representing the number of students.
+
+### Output
+- The minimum value of the maximum number of pages assigned to a student, or `-1` if allocation is not possible.
+
+### Constraints
+1 <=  arr.size() <= 10^6
+1 <= arr[i] <= 10^3
+1 <= k <= 10^3 
+### Examples
+
+#### Example 1
+```plaintext
+Input: arr[] = [15, 17, 20], k = 5
+Output: -1
+Explanation: Allocation cannot be done since there are fewer books than students.
+```
+
+#### Example 2
+```plaintext
+Input: arr[] = [22, 23, 67], k = 1
+Output: 112
+Explanation: All books are assigned to the single student, so the total number of pages is 112.
+```
+
+---
+
+## Solution Approach
+
+This problem can be solved using **Binary Search** on the range of possible maximum page allocations. The key idea is to minimize the maximum number of pages assigned to any student.
+
+### Steps:
+1. Determine the range for binary search:
+   - **Low**: The maximum number of pages in a single book (`max(arr[])`).
+   - **High**: The total sum of all pages (`sum(arr[])`).
+2. Use a helper function `isFeasible` to check if it's possible to allocate books such that no student gets more than `mid` pages.
+3. Perform binary search on the range to find the minimum feasible value of `mid`.
+
+---
+
+## Implementation
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+class Solution {
+  public:
+    bool isFeasible(vector<int> &arr, int k, int maxPages) {
+        int studentCount = 1, sum = 0;
+        for (int pages : arr) {
+            if (pages > maxPages) return false; // A single book exceeds the limit
+            if (sum + pages > maxPages) {
+                studentCount++; // Assign to a new student
+                sum = pages;
+                if (studentCount > k) return false;
+            } else {
+                sum += pages;
+            }
+        }
+        return true;
+    }
+
+    int findPages(vector<int> &arr, int k) {
+        if (k > arr.size()) return -1; // More students than books
+
+        int low = *max_element(arr.begin(), arr.end());
+        int high = accumulate(arr.begin(), arr.end(), 0);
+        int result = -1;
+
+        while (low <= high) {
+            int mid = low + (high - low) / 2;
+            if (isFeasible(arr, k, mid)) {
+                result = mid; // Update result to the current feasible maximum
+                high = mid - 1; // Try for a smaller maximum
+            } else {
+                low = mid + 1; // Increase the limit
+            }
+        }
+        return result;
+    }
+};
+
+int main() {
+    int test_case;
+    cin >> test_case;
+    cin.ignore();
+    while (test_case--) {
+
+        int d;
+        vector<int> arr, brr, crr;
+        string input;
+        getline(cin, input);
+        stringstream ss(input);
+        int number;
+        while (ss >> number) {
+            arr.push_back(number);
+        }
+        getline(cin, input);
+        ss.clear();
+        ss.str(input);
+        while (ss >> number) {
+            crr.push_back(number);
+        }
+        d = crr[0];
+        int n = arr.size();
+        Solution ob;
+        int ans = ob.findPages(arr, d);
+        cout << ans << endl;
+
+        cout << "~"
+             << "\n";
+    }
+    return 0;
+}
+```
+
+---
+
+## Complexity Analysis
+
+1. **Time Complexity:**
+   - Binary search takes \(O(\log(\text{sum of arr}))\).
+   - Checking feasibility takes \(O(n)\), where \(n\) is the size of the array.
+   - Total: \(O(n \cdot \log(\text{sum of arr}))\).
+
+2. **Space Complexity:**
+   - \(O(1)\), as no additional space is used apart from variables.
+
+---
+
+## Explanation of Examples
+
+### Example 1
+- Input: `arr[] = [15, 17, 20]`, `k = 5`
+- Output: `-1`
+- Explanation: Allocation cannot be done since there are fewer books than students.
+
+### Example 2
+- Input: `arr[] = [22, 23, 67]`, `k = 1`
+- Output: `112`
+- Explanation: All books are assigned to the single student, so the total number of pages is 112.
