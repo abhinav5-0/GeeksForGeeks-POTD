@@ -1,0 +1,135 @@
+# Problem of the Day: Kth Missing Positive Number
+
+## Problem Statement
+You are given a sorted array of distinct positive integers `arr[]`. Your task is to find the **kth positive number** that is missing from the array.
+
+### Examples
+
+#### Example 1:
+**Input:**
+```
+arr = [2, 3, 4, 7, 11], k = 5
+```
+**Output:**
+```
+9
+```
+**Explanation:**
+Missing numbers are `1, 5, 6, 8, 9, 10...`. The 5th missing number is `9`.
+
+#### Example 2:
+**Input:**
+```
+arr = [1, 2, 3], k = 2
+```
+**Output:**
+```
+5
+```
+**Explanation:**
+Missing numbers are `4, 5, 6...`. The 2nd missing number is `5`.
+
+#### Example 3:
+**Input:**
+```
+arr = [3, 5, 9, 10, 11, 12], k = 2
+```
+**Output:**
+```
+2
+```
+**Explanation:**
+Missing numbers are `1, 2, 4, 6...`. The 2nd missing number is `2`.
+
+## Constraints
+1 <= arr.size() <= 10^5
+1 <= k <= 10^5
+1 <= arr[i]<= 10^6
+
+---
+
+## Approach
+To solve this problem efficiently, we use **binary search**:
+
+1. **Key Observation**:
+   - For any index `i`, the number of missing positive integers up to `arr[i]` is:
+     
+     \[ \text{missing\_count} = arr[i] - (i + 1) \]
+   
+   - Using this property, we can determine if the `k`th missing number lies before or after `arr[mid]`.
+
+2. **Binary Search Steps**:
+   - If `missing_count < k`, the `k`th missing number lies to the right of `mid`. Move the `left` pointer.
+   - Otherwise, it lies to the left. Move the `right` pointer.
+
+3. **Final Calculation**:
+   - After the binary search, the `left` pointer points to the position where the `k`th missing number would be.
+   - The result is `left + k`.
+
+---
+
+## Code Implementation
+
+### C++ Solution
+```cpp
+class Solution {
+  public:
+    int kthMissing(vector<int> &arr, int k) {
+        int left = 0, right = arr.size() - 1;
+        
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            int missing_count = arr[mid] - (mid + 1);
+            
+            if (missing_count < k) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+        
+        return left + k;
+    }
+};
+```
+
+---
+
+## Complexity Analysis
+
+- **Time Complexity**: \(O(\log n)\), where \(n\) is the size of the array, due to binary search.
+- **Space Complexity**: \(O(1)\), as no additional space is used.
+
+---
+
+## Example Walkthrough
+
+### Example Input:
+```
+arr = [2, 3, 4, 7, 11], k = 5
+```
+
+### Execution:
+1. **Initial Variables**:
+   - `left = 0`, `right = 4`
+
+2. **Binary Search Iterations**:
+   - **Iteration 1**:
+     - `mid = 2`, `missing_count = arr[2] - (2 + 1) = 4 - 3 = 1`
+     - `missing_count < k`, so update `left = mid + 1 = 3`
+   - **Iteration 2**:
+     - `mid = 3`, `missing_count = arr[3] - (3 + 1) = 7 - 4 = 3`
+     - `missing_count < k`, so update `left = mid + 1 = 4`
+   - **Iteration 3**:
+     - `mid = 4`, `missing_count = arr[4] - (4 + 1) = 11 - 5 = 6`
+     - `missing_count > k`, so update `right = mid - 1 = 3`
+
+3. **Result**:
+   - `left = 4`, `k = 5`
+   - Missing number = `left + k = 4 + 5 = 9`
+
+---
+
+## Notes
+This binary search-based approach ensures optimal performance even for large input sizes, making it suitable for competitive programming and real-world scenarios with large datasets.
+
