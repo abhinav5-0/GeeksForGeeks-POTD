@@ -1,0 +1,153 @@
+# Problem of the Day: Search in a Row-Column Sorted Matrix
+
+## Problem Statement
+You are given a 2D integer matrix `mat[][]` of size `n x m`, where every row and column is sorted in increasing order. Your task is to determine if a given number `x` exists in the matrix.
+
+### Examples:
+
+#### Example 1:
+**Input:**  
+```
+mat[][] = [[3, 30, 38], 
+           [20, 52, 54], 
+           [35, 60, 69]]
+x = 62
+```
+**Output:**
+```
+false
+```
+**Explanation:**  
+62 is not present in the matrix, so the output is `false`.
+
+#### Example 2:
+**Input:**
+```
+mat[][] = [[18, 21, 27],
+           [38, 55, 67]]
+x = 55
+```
+**Output:**
+```
+true
+```
+**Explanation:**
+55 is present in the matrix, so the output is `true`.
+
+#### Example 3:
+**Input:**
+```
+mat[][] = [[1, 2, 3],
+           [4, 5, 6],
+           [7, 8, 9]]
+x = 3
+```
+**Output:**
+```
+true
+```
+**Explanation:**
+3 is present in the matrix, so the output is `true`.
+
+---
+
+## Constraints
+- `1 <= n, m <= 1000`
+- `1 <= mat[i][j] <= 10^9`
+- `1 <= x <= 10^9`
+
+---
+
+## Approach
+
+### Idea:
+Start at the **top-right corner** of the matrix. This position gives you the ability to make an optimal decision:
+- If the current element is equal to `x`, you found the number.
+- If the current element is greater than `x`, move left (decrease column index).
+- If the current element is smaller than `x`, move down (increase row index).
+
+This approach ensures you only traverse a maximum of `n + m - 1` elements in the worst case.
+
+### Algorithm:
+1. Start at the top-right corner of the matrix.
+2. Compare the current element with `x`:
+   - If it equals `x`, return `true`.
+   - If it is greater than `x`, move left.
+   - If it is less than `x`, move down.
+3. If you exit the matrix bounds, return `false` (element not found).
+
+---
+
+## Implementation (C++)
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+class Solution {
+  public:
+    bool matSearch(vector<vector<int>> &mat, int x) {
+        int n = mat.size();
+        int m = mat[0].size();
+        int row = 0, col = m - 1; // Start at the top-right corner
+
+        while (row < n && col >= 0) {
+            if (mat[row][col] == x) {
+                return true; // Found the element
+            } else if (mat[row][col] > x) {
+                col--; // Move left
+            } else {
+                row++; // Move down
+            }
+        }
+
+        return false; // Element not found
+    }
+};
+
+int main() {
+    int t;
+    cin >> t;
+
+    while (t--) {
+        int r, c;
+        cin >> r >> c;
+        vector<vector<int>> matrix(r, vector<int>(c, 0));
+        int x;
+        for (int i = 0; i < r; i++) {
+            for (int j = 0; j < c; j++) {
+                cin >> matrix[i][j];
+            }
+        }
+        cin >> x;
+        Solution ob;
+        bool result = ob.matSearch(matrix, x);
+        if (result)
+            cout << "true\n";
+        else
+            cout << "false\n";
+        cout << "~\n";
+    }
+    return 0;
+}
+```
+
+---
+
+## Complexity Analysis
+
+### Time Complexity:
+- Each step moves either one row down or one column left.
+- Maximum moves: `n + m - 1`.
+- **O(n + m)**.
+
+### Space Complexity:
+- No extra space is used apart from variables.
+- **O(1)**.
+
+---
+
+## Key Points
+- Leverage the sorted nature of the matrix for efficient searching.
+- Starting from the top-right corner simplifies navigation.
+- Works well within given constraints (`n, m <= 1000`).
