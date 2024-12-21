@@ -1,5 +1,5 @@
 # GeeksForGeeks-POTD
-A repository containing my detailed solutions for the GeeksforGeeks Problem of the Day, written in C++/Python (or your preferred language). Each solution includes explanations and optimal approaches!
+A repository containing my detailed solutions for the GeeksforGeeks Problem of the Day, written in C++. Each solution includes explanations and optimal approaches!
 # GeeksForGeeks POTD Solutions 🚀
 
 Welcome to **Abhinav's** repository for the **GeeksForGeeks Problem of the Day (POTD)**! This repository contains my solutions to GFG's daily coding challenges, organized and explained for easy learning and reference.
@@ -9,7 +9,7 @@ Welcome to **Abhinav's** repository for the **GeeksForGeeks Problem of the Day (
 ## 📂 Repository Overview
 
 - **Repository Name:** `GeeksForGeeks-POTD`
-- **Languages Used:** C++/Python.
+- **Languages Used:** C++.
 - **Structure:** Solutions are organized by **year**, **month**, and **problem name**.
 - **Difficulty Levels:** Easy, Medium, Hard.
 
