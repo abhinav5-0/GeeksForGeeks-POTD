@@ -1,0 +1,154 @@
+# Problem of the Day: Rotate Matrix by 90 Degrees Anti-Clockwise
+
+## Problem Statement
+Given a square matrix `mat[][]` of size `n x n`, rotate it 90 degrees in an anti-clockwise direction **in-place**, i.e., without using any extra space.
+
+### Input Format
+- An integer `t`, representing the number of test cases.
+- For each test case:
+  - An integer `n`, representing the size of the square matrix.
+  - A matrix of size `n x n` where each element lies in the range `0 <= mat[i][j] <= 10^3`.
+
+### Output Format
+For each test case, print the rotated matrix, row by row.
+
+### Constraints:
+1 ≤ n ≤ 10^2
+0 ≤ mat[i][j] ≤ 10^3
+
+---
+
+## Example
+
+### Input
+```
+2
+3
+1 2 3
+4 5 6
+7 8 9
+2
+1 2
+3 4
+```
+
+### Output
+```
+3 6 9
+2 5 8
+1 4 7
+2 4
+1 3
+```
+
+---
+
+## Solution Approach
+The problem can be solved in two steps:
+
+1. **Transpose the Matrix:** Convert rows into columns by swapping elements along the diagonal.
+2. **Reverse Each Column:** Swap elements from top to bottom in each column to achieve a 90-degree anti-clockwise rotation.
+
+This is done in-place to meet the space constraint.
+
+### Algorithm
+1. **Transpose the Matrix:**
+   - Loop through the matrix and swap elements `mat[i][j]` with `mat[j][i]` for \( i < j \).
+2. **Reverse Each Column:**
+   - For each column, swap the elements from top to bottom until the middle is reached.
+
+---
+
+### Pseudocode
+```text
+Function rotateBy90(matrix):
+    n = size of matrix
+    
+    // Step 1: Transpose the matrix
+    for i from 0 to n-1:
+        for j from i+1 to n-1:
+            swap(matrix[i][j], matrix[j][i])
+
+    // Step 2: Reverse each column
+    for j from 0 to n-1:
+        top = 0, bottom = n-1
+        while top < bottom:
+            swap(matrix[top][j], matrix[bottom][j])
+            top += 1
+            bottom -= 1
+```
+
+---
+
+## Implementation
+Below is the C++ implementation of the above approach:
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+class Solution {
+public:
+    void rotateby90(vector<vector<int>>& mat) {
+        int n = mat.size();
+
+        for (int i = 0; i < n; ++i) {
+            for (int j = i + 1; j < n; ++j) {
+                swap(mat[i][j], mat[j][i]);
+            }
+        }
+
+        for (int j = 0; j < n; ++j) {
+            int top = 0, bottom = n - 1;
+            while (top < bottom) {
+                swap(mat[top][j], mat[bottom][j]);
+                ++top;
+                --bottom;
+            }
+        }
+    }
+};
+
+int main() {
+    int t;
+    cin >> t;
+
+    while (t--) {
+        int n;
+        cin >> n;
+        vector<vector<int>> matrix(n, vector<int>(n));
+
+        for (int i = 0; i < n; ++i) {
+            for (int j = 0; j < n; ++j) {
+                cin >> matrix[i][j];
+            }
+        }
+
+        Solution ob;
+        ob.rotateby90(matrix);
+        for (int i = 0; i < n; ++i) {
+            for (int j = 0; j < n; ++j) {
+                cout << matrix[i][j] << " ";
+            }
+            cout << endl;
+        }
+    }
+    return 0;
+}
+```
+
+---
+
+## Complexity Analysis
+
+- **Time Complexity:** \( O(n^2) \)
+  - Transposing the matrix and reversing each column both take \( O(n^2) \).
+- **Space Complexity:** \( O(1) \)
+  - The rotation is performed in-place without using any extra space.
+
+---
+
+## Edge Cases
+1. \( n = 1 \): A single-element matrix remains the same after rotation.
+2. All elements are the same: Check if the output matrix structure is preserved.
+3. Large \( n \): Verify performance with \( n = 100 \).
