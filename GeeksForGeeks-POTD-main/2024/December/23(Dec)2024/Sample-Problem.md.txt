@@ -1,0 +1,156 @@
+# Problem of the Day: Matrix Element Search
+
+## Problem Statement
+
+Given a 2D integer matrix `mat[][]` of size `n x m`, where every row and column is sorted in increasing order, and a number `x`, the task is to find whether the element `x` is present in the matrix.
+
+### Examples
+
+#### Example 1
+- Input:
+  ```
+  mat[][] = [[3, 30, 38],
+             [20, 52, 54],
+             [35, 60, 69]]
+  x = 62
+  ```
+- Output:
+  ```
+  false
+  ```
+- Explanation: 62 is not present in the matrix.
+
+#### Example 2
+- Input:
+  ```
+  mat[][] = [[18, 21, 27],
+             [38, 55, 67]]
+  x = 55
+  ```
+- Output:
+  ```
+  true
+  ```
+- Explanation: 55 is present in the matrix.
+
+#### Example 3
+- Input:
+  ```
+  mat[][] = [[1, 2, 3],
+             [4, 5, 6],
+             [7, 8, 9]]
+  x = 3
+  ```
+- Output:
+  ```
+  true
+  ```
+- Explanation: 3 is present in the matrix.
+
+### Constraints
+- `1 <= n, m <= 1000`
+- `1 <= mat[i][j] <= 10^9`
+- `1 <= x <= 10^9`
+
+---
+
+## Approach
+
+1. Start from the top-right corner of the matrix.
+2. Compare the element at the current position with `x`:
+   - If the element equals `x`, return `true`.
+   - If the element is greater than `x`, move left.
+   - If the element is less than `x`, move down.
+3. If the search exits the matrix boundaries, return `false`.
+
+### Algorithm
+- Initialize `row = 0` and `col = m - 1`.
+- While `row < n` and `col >= 0`:
+  - If `mat[row][col] == x`, return `true`.
+  - Else if `mat[row][col] > x`, decrement `col`.
+  - Else, increment `row`.
+- Return `false`.
+
+---
+
+## Implementation
+
+### C++ Code
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+class Solution {
+public:
+    bool matSearch(vector<vector<int>> &mat, int x) {
+        int n = mat.size();    // Number of rows
+        int m = mat[0].size(); // Number of columns
+        int row = 0, col = m - 1; // Start at top-right corner
+        
+        while (row < n && col >= 0) {
+            if (mat[row][col] == x) {
+                return true;
+            } else if (mat[row][col] > x) {
+                col--; // Move left
+            } else {
+                row++; // Move down
+            }
+        }
+        return false; // Element not found
+    }
+};
+
+int main() {
+    int t;
+    cin >> t;
+
+    while (t--) {
+        int r, c;
+        cin >> r >> c;
+        vector<vector<int>> matrix(r, vector<int>(c, 0));
+        int x;
+        for (int i = 0; i < r; i++) {
+            for (int j = 0; j < c; j++) {
+                cin >> matrix[i][j];
+            }
+        }
+        cin >> x;
+        Solution ob;
+        bool an = ob.matSearch(matrix, x);
+        if (an)
+            cout << "true" << endl;
+        else
+            cout << "false" << endl;
+    }
+    return 0;
+}
+```
+
+---
+
+## Explanation of Code
+
+1. **Initialization**:
+   - The search begins at the top-right corner of the matrix.
+   - Variables `row` and `col` track the current position in the matrix.
+
+2. **Search Loop**:
+   - The loop continues as long as the current position is within matrix boundaries.
+   - If the element at the current position matches `x`, the function returns `true`.
+   - If the element is greater than `x`, the search moves left.
+   - If the element is less than `x`, the search moves down.
+
+3. **Termination**:
+   - If the loop completes without finding `x`, the function returns `false`.
+
+---
+
+## Complexity Analysis
+
+- **Time Complexity**: `O(n + m)`
+  - At most, the search moves `n` steps downward and `m` steps leftward.
+
+- **Space Complexity**: `O(1)`
+  - The algorithm uses only constant extra space.
+
