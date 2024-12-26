@@ -1,0 +1,138 @@
+# Problem: Count Pairs with Given Sum
+
+## Difficulty
+Easy
+
+## Accuracy
+45.79%
+
+## Points
+2
+
+---
+
+## Problem Statement
+Given an array `arr[]` and an integer `target`, find the number of pairs in the array `arr[]` that sum up to the given target.
+
+### Examples
+
+#### Example 1
+**Input:**
+```
+arr[] = [1, 5, 7, -1, 5]
+target = 6
+```
+**Output:**
+```
+3
+```
+**Explanation:**
+Pairs with sum `6` are `(1, 5)`, `(7, -1)`, and `(1, 5)`.
+
+#### Example 2
+**Input:**
+```
+arr[] = [1, 1, 1, 1]
+target = 2
+```
+**Output:**
+```
+6
+```
+**Explanation:**
+Pairs with sum `2` are `(1, 1), (1, 1), (1, 1), (1, 1), (1, 1), (1, 1)`.
+
+#### Example 3
+**Input:**
+```
+arr[] = [10, 12, 10, 15, -1]
+target = 125
+```
+**Output:**
+```
+0
+```
+
+---
+
+## Constraints
+- \(1 \leq \text{arr.size()} \leq 10^5\)
+- \(-10^4 \leq arr[i] \leq 10^4\)
+- \(1 \leq \text{target} \leq 10^4\)
+
+---
+
+## Approach
+### Algorithm
+1. Use a hash map (`unordered_map`) to keep track of the frequency of each element in the array encountered so far.
+2. Iterate through each element in the array:
+   - Compute its complement as `target - num`.
+   - If the complement exists in the map, it means there are pairs that sum up to the target. Add the frequency of the complement to the count.
+   - Update the frequency of the current element in the hash map.
+3. Return the total count.
+
+---
+
+## Implementation
+
+### C++ Code
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+class Solution {
+  public:
+    int countPairs(vector<int> &arr, int target) {
+        unordered_map<int, int> freq;
+        int count = 0;
+
+        for (int num : arr) {
+            int complement = target - num;
+            if (freq.find(complement) != freq.end()) {
+                count += freq[complement];
+            }
+            freq[num]++;
+        }
+
+        return count;
+    }
+};
+
+int main() {
+    int t;
+    cin >> t;
+    cin.ignore();
+    while (t--) {
+        vector<int> arr;
+        string input;
+        getline(cin, input);
+        stringstream ss(input);
+        int number;
+        while (ss >> number) {
+            arr.push_back(number);
+        }
+        int target;
+        cin >> target;
+        cin.ignore();
+        Solution ob;
+        int res = ob.countPairs(arr, target);
+
+        cout << res << endl << "~" << endl;
+    }
+    return 0;
+}
+```
+
+---
+
+## Complexity Analysis
+
+- **Time Complexity**: \(O(n)\), where \(n\) is the size of the array. Each element is processed once.
+- **Space Complexity**: \(O(n)\), for storing the frequencies in the hash map.
+
+---
+
+## Key Points
+- The algorithm uses a hash map to achieve linear time complexity.
+- Handles edge cases, such as no pairs summing to the target.
+- Efficient even for large input sizes due to \(O(n)\) complexity.
