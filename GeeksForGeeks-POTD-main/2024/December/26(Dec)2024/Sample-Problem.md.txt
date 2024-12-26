@@ -1,0 +1,162 @@
+# Two Sum Problem
+
+This document describes the solution to the problem of finding if there exist two distinct indices in an array such that the sum of their elements equals a given target.
+
+### Problem Statement:
+Given an array `arr[]` of positive integers and another integer `target`, determine if there exist two distinct indices such that the sum of their elements equals `target`.
+
+#### Examples:
+
+Input:
+```text
+arr[] = [1, 4, 45, 6, 10, 8], target = 16
+```
+Output:
+```text
+true
+```
+Explanation:
+`arr[3] + arr[4] = 6 + 10 = 16`.
+
+Input:
+```text
+arr[] = [1, 2, 4, 3, 6], target = 11
+```
+Output:
+```text
+false
+```
+Explanation:
+No such pair exists.
+
+---
+
+### Approach
+
+The optimized solution uses hashing for faster lookups. The key idea is to traverse the array and, for each element, compute its complement (i.e., `target - current_element`). We check if this complement already exists in a set. If yes, the pair is found; otherwise, we add the current element to the set.
+
+#### Steps:
+1. Create an unordered set to store seen elements.
+2. For every element in the array:
+   - Compute its complement (`target - current_element`).
+   - Check if the complement is present in the set.
+   - If present, return `true`.
+   - Otherwise, insert the current element into the set.
+3. If no pair is found after traversing the array, return `false`.
+
+---
+
+### Optimized Code
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+class Solution {
+  public:
+    bool twoSum(vector<int>& arr, int target) {
+        unordered_set<int> seen; // Store numbers we have seen so far
+        for (int num : arr) {
+            int complement = target - num; // Calculate the required complement
+            if (seen.find(complement) != seen.end()) { // Check if complement exists
+                return true; // Pair found
+            }
+            seen.insert(num); // Add current number to the set
+        }
+        return false; // No pair found
+    }
+};
+
+int main() {
+    int t;
+    cin >> t; // Number of test cases
+    cin.ignore();
+    while (t--) {
+        int x;
+        cin >> x; // Target sum
+        cin.ignore();
+
+        vector<int> arr;
+        string input;
+        getline(cin, input); // Read the entire line for the array elements
+        stringstream ss(input);
+        int number;
+        while (ss >> number) {
+            arr.push_back(number); // Add numbers to the array
+        }
+
+        Solution ob;
+        auto ans = ob.twoSum(arr, x);
+        cout << (ans ? "true" : "false") << endl; // Print result
+        cout << "~" << endl; // Separator for output
+    }
+
+    return 0;
+}
+```
+
+---
+
+### Explanation with Example:
+
+#### Input:
+```text
+arr[] = [1, 4, 45, 6, 10, 8], target = 16
+```
+
+#### Step-by-step Execution:
+1. Initialize `seen = {}`.
+2. Iterate through the array:
+   - For `num = 1`: complement = `16 - 1 = 15`. Not in `seen`. Add `1` to `seen`. Now, `seen = {1}`.
+   - For `num = 4`: complement = `16 - 4 = 12`. Not in `seen`. Add `4` to `seen`. Now, `seen = {1, 4}`.
+   - For `num = 45`: complement = `16 - 45 = -29`. Not in `seen`. Add `45` to `seen`. Now, `seen = {1, 4, 45}`.
+   - For `num = 6`: complement = `16 - 6 = 10`. Not in `seen`. Add `6` to `seen`. Now, `seen = {1, 4, 45, 6}`.
+   - For `num = 10`: complement = `16 - 10 = 6`. Found in `seen`! Return `true`.
+
+#### Output:
+```text
+true
+```
+
+---
+
+### Complexity Analysis:
+
+1. **Time Complexity**:
+   - Traversing the array: **O(n)**.
+   - Each set operation (insert/find): **O(1)** (average case).
+   - Total: **O(n)**.
+
+2. **Space Complexity**:
+   - Space for the set: **O(n)**.
+
+---
+
+### Test Cases:
+#### Example 1:
+Input:
+```text
+arr[] = [1, 4, 45, 6, 10, 8], target = 16
+```
+Output:
+```text
+true
+```
+
+#### Example 2:
+Input:
+```text
+arr[] = [1, 2, 4, 3, 6], target = 11
+```
+Output:
+```text
+false
+```
+
+---
+
+### Notes:
+- The use of hashing ensures that we don’t need to use nested loops (brute force), making the solution efficient.
+- The problem can also be extended to find the indices or the values of the pair if needed.
+- This approach works only if all numbers are positive. For negative numbers, the same logic applies.
+
+---
