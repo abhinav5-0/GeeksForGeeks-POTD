@@ -1,0 +1,116 @@
+# Problem of the Day: Find All Triplets with Zero Sum
+
+## Problem Statement
+Given an array `arr[]`, find all possible triplets `i, j, k` in the array such that the sum of the elements at these indices equals zero. Each triplet should also satisfy the condition `i < j < k`.
+
+### Input Format:
+- An array of integers `arr[]`.
+
+### Output Format:
+- A list of lists where each inner list contains three indices `[i, j, k]` such that the corresponding triplet sums to zero.
+
+### Constraints:
+- \(3 \leq arr.size() \leq 10^3\)
+- \(-10^4 \leq arr[i] \leq 10^4\)
+
+---
+
+## Examples
+
+### Example 1
+**Input:**
+```plaintext
+arr[] = [0, -1, 2, -3, 1]
+```
+**Output:**
+```plaintext
+[[0, 1, 4], [2, 3, 4]]
+```
+**Explanation:**
+Triplets with sum 0 are:
+- `arr[0] + arr[1] + arr[4] = 0 + (-1) + 1 = 0`
+- `arr[2] + arr[3] + arr[4] = 2 + (-3) + 1 = 0`
+
+### Example 2
+**Input:**
+```plaintext
+arr[] = [1, -2, 1, 0, 5]
+```
+**Output:**
+```plaintext
+[[0, 1, 2]]
+```
+**Explanation:**
+Only triplet which satisfies the condition is `arr[0] + arr[1] + arr[2] = 1 + (-2) + 1 = 0`.
+
+### Example 3
+**Input:**
+```plaintext
+arr[] = [2, 3, 1, 0, 5]
+```
+**Output:**
+```plaintext
+[]
+```
+**Explanation:**
+There is no triplet with sum 0.
+
+---
+
+## Approach
+
+We use a brute-force approach with three nested loops to generate all possible triplets. For each triplet, we check if the sum equals zero. If it does, we add the indices of the triplet to the result list. This approach directly adheres to the constraints and ensures correctness for all valid inputs.
+
+---
+
+## Solution
+
+```cpp
+class Solution {
+public:
+    vector<vector<int>> findTriplets(vector<int>& arr) {
+        vector<vector<int>> res;
+        int n = arr.size();
+        for (int i = 0; i < n - 2; i++) {
+            for (int j = i + 1; j < n - 1; j++) {
+                for (int k = j + 1; k < n; k++) {
+                    if (arr[i] + arr[j] + arr[k] == 0) {
+                        res.push_back({i, j, k});
+                    }
+                }
+            }
+        }
+
+        return res;
+    }
+};
+```
+
+---
+
+## Complexity Analysis
+
+### Time Complexity:
+- **Outer Loop:** Runs \(O(n)\).
+- **Second Loop:** Runs \(O(n - 1)\).
+- **Innermost Loop:** Runs \(O(n - 2)\).
+- Overall Time Complexity: \(O(n^3)\).
+
+### Space Complexity:
+- The algorithm uses \(O(1)\) additional space apart from the result storage.
+
+---
+
+## Explanation of Code
+1. **Triple Nested Loops:**
+   - The three loops iterate over all possible combinations of indices `i`, `j`, and `k` where `i < j < k`.
+2. **Condition Check:**
+   - Inside the innermost loop, we check if the sum of `arr[i]`, `arr[j]`, and `arr[k]` equals zero.
+3. **Result Storage:**
+   - If the condition is satisfied, we store the triplet indices as a vector in the result list.
+
+---
+
+## Notes
+This brute-force approach ensures that the problem's constraints are adhered to. While not optimal for very large arrays, it guarantees correctness within the given input size limits.
+
