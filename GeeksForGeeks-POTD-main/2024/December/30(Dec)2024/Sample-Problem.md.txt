@@ -1,0 +1,149 @@
+# Union of Arrays with Duplicates
+
+## Problem Statement
+Given two arrays `a[]` and `b[]`, the task is to find the number of elements in the union of these two arrays. The union of two arrays is defined as the set containing distinct elements from both arrays. If there are repetitions, only one occurrence should be considered in the union.
+
+### Note:
+- Elements of `a[]` and `b[]` are not necessarily distinct.
+
+## Examples
+
+### Example 1:
+**Input:**
+```
+a[] = [1, 2, 3, 4, 5]
+b[] = [1, 2, 3]
+```
+**Output:**
+```
+5
+```
+**Explanation:**
+Union set of both arrays is `{1, 2, 3, 4, 5}`. Count is 5.
+
+### Example 2:
+**Input:**
+```
+a[] = [85, 25, 1, 32, 54, 6]
+b[] = [85, 2]
+```
+**Output:**
+```
+7
+```
+**Explanation:**
+Union set of both arrays is `{85, 25, 1, 32, 54, 6, 2}`. Count is 7.
+
+### Example 3:
+**Input:**
+```
+a[] = [1, 2, 1, 1, 2]
+b[] = [2, 2, 1, 2, 1]
+```
+**Output:**
+```
+2
+```
+**Explanation:**
+Union set of both arrays is `{1, 2}`. Count is 2.
+
+## Constraints
+- \(1 \leq a.size(), b.size() \leq 10^6\)
+- \(0 \leq a[i], b[i] \leq 10^5\)
+
+## Solution
+### Approach
+1. Use an `unordered_set` to store elements from both arrays.
+2. Insert all elements of `a[]` into the set.
+3. Insert all elements of `b[]` into the same set.
+4. Return the size of the set, which gives the count of distinct elements in the union.
+
+### Code Implementation
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+class Solution {
+  public:
+    // Function to return the count of number of elements in union of two arrays.
+    int findUnion(vector<int>& a, vector<int>& b) {
+        unordered_set<int> unionSet;
+
+        // Insert elements of array a into the set
+        for (int num : a) {
+            unionSet.insert(num);
+        }
+
+        // Insert elements of array b into the set
+        for (int num : b) {
+            unionSet.insert(num);
+        }
+
+        // The size of the set gives the count of distinct elements in the union
+        return unionSet.size();
+    }
+};
+
+int main() {
+    int t;
+    cin >> t;
+    cin.ignore(); // Ignore the newline character after reading t
+
+    while (t--) {
+        vector<int> a;
+        vector<int> b;
+
+        string input;
+        // For a
+        getline(cin, input); // Read the entire line for the array elements
+        stringstream ss(input);
+        int number;
+        while (ss >> number) {
+            a.push_back(number);
+        }
+
+        // For b
+        getline(cin, input); // Read the entire line for the array elements
+        stringstream ss2(input);
+        while (ss2 >> number) {
+            b.push_back(number);
+        }
+
+        Solution ob;
+        cout << ob.findUnion(a, b) << endl;
+        cout << '~' << endl;
+    }
+
+    return 0;
+}
+```
+
+### Complexity Analysis
+- **Time Complexity:**
+  - \(O(a.size() + b.size())\): Each insertion into an `unordered_set` is \(O(1)\) on average.
+- **Space Complexity:**
+  - \(O(a.size() + b.size())\): The `unordered_set` may hold all distinct elements from `a[]` and `b[]`.
+
+### Explanation of Driver Code
+1. Reads the number of test cases (`t`).
+2. For each test case:
+   - Reads two arrays (`a` and `b`).
+   - Calls `findUnion` and prints the result.
+
+## Example Input and Output
+
+### Input:
+```
+2
+1 2 3 4 5
+1 2 3
+85 25 1 32 54 6
+85 2
+```
+
+### Output:
+```
+5
+~
+7
+~

@@ -1,0 +1,20 @@
+class Solution {
+  public:
+    // Function to return the count of number of elements in union of two arrays.
+    int findUnion(vector<int>& a, vector<int>& b) {
+        unordered_set<int> unionSet;
+
+        // Insert elements of array a into the set
+        for (int num : a) {
+            unionSet.insert(num);
+        }
+
+        // Insert elements of array b into the set
+        for (int num : b) {
+            unionSet.insert(num);
+        }
+
+        // The size of the set gives the count of distinct elements in the union
+        return unionSet.size();
+    }
+};
