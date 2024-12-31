@@ -1,0 +1,161 @@
+# Problem of the Day: Longest Consecutive Subsequence
+
+**Difficulty:** Medium  
+**Accuracy:** 33.0%  
+**Submissions:** 328K+  
+**Points:** 4  
+
+## Problem Statement
+Given an array `arr[]` of non-negative integers, find the length of the longest sub-sequence such that elements in the subsequence are consecutive integers. The consecutive numbers can appear in any order.
+
+---
+
+### Examples
+
+#### Example 1:
+**Input:**  
+`arr[] = [2, 6, 1, 9, 4, 5, 3]`  
+**Output:**  
+`6`  
+**Explanation:**  
+The consecutive numbers here are `1, 2, 3, 4, 5, 6`. These 6 numbers form the longest consecutive subsequence.
+
+#### Example 2:
+**Input:**  
+`arr[] = [1, 9, 3, 10, 4, 20, 2]`  
+**Output:**  
+`4`  
+**Explanation:**  
+The longest consecutive subsequence is `1, 2, 3, 4`.
+
+#### Example 3:
+**Input:**  
+`arr[] = [15, 13, 12, 14, 11, 10, 9]`  
+**Output:**  
+`7`  
+**Explanation:**  
+The longest consecutive subsequence is `9, 10, 11, 12, 13, 14, 15`, which has a length of 7.
+
+---
+
+### Constraints
+- `1 <= arr.size() <= 10^5`
+- `0 <= arr[i] <= 10^5`
+
+---
+
+## Approach
+
+### Steps to Solve:
+1. Use a **hash set** to store all unique elements in the array.
+2. Iterate through each element in the array:
+   - If the current element is the start of a sequence (i.e., `element - 1` is not in the set), then count the length of the consecutive sequence starting from this element.
+   - Keep track of the maximum sequence length.
+3. Return the maximum sequence length found.
+
+---
+
+## Implementation
+
+```cpp
+#include <bits/stdc++.h>
+using namespace std;
+
+class Solution {
+  public:
+    // Function to return length of longest subsequence of consecutive integers.
+    int longestConsecutive(vector<int>& arr) {
+        if (arr.empty()) return 0; // Handle edge case for empty array
+
+        unordered_set<int> nums(arr.begin(), arr.end()); // Store all elements in a hash set
+        int maxLength = 0;
+
+        for (int num : nums) {
+            // Only start counting when it's the start of a sequence
+            if (nums.find(num - 1) == nums.end()) {
+                int currentNum = num;
+                int currentLength = 1;
+
+                // Count the length of the consecutive sequence
+                while (nums.find(currentNum + 1) != nums.end()) {
+                    currentNum++;
+                    currentLength++;
+                }
+
+                // Update the maximum length
+                maxLength = max(maxLength, currentLength);
+            }
+        }
+
+        return maxLength;
+    }
+};
+
+int main() {
+    int t;
+    cin >> t;
+    cin.ignore();
+    while (t--) {
+        vector<int> arr;
+        string input;
+
+        // Read first array
+        getline(cin, input);
+        stringstream ss(input);
+        int number;
+        while (ss >> number) {
+            arr.push_back(number);
+        }
+
+        Solution ob;
+        int res = ob.longestConsecutive(arr);
+
+        cout << res << endl << "~" << endl;
+    }
+    return 0;
+}
+```
+
+---
+
+## Explanation of the Code
+
+1. **Hash Set Initialization:**  
+   - All unique elements are inserted into the hash set in \(O(n)\) time.
+   - This allows for \(O(1)\) lookups.
+
+2. **Iterating Through the Set:**  
+   - For each element, check if it's the beginning of a sequence.
+   - If yes, compute the length of the sequence.
+
+3. **Tracking the Longest Sequence:**  
+   - Keep updating `maxLength` whenever a longer sequence is found.
+
+---
+
+## Complexity Analysis
+
+### Time Complexity:
+- **Hash Set Construction:** \(O(n)\)
+- **Iteration and Consecutive Counting:** \(O(n)\), as each number is processed only once.
+
+**Overall:** \(O(n)\)
+
+### Space Complexity:
+- \(O(n)\) for the hash set.
+
+---
+
+## Example Walkthrough
+
+### Input:
+```plaintext
+arr[] = [2, 6, 1, 9, 4, 5, 3]
+```
+
+### Output:
+```plaintext
+6
+```
+
+---
