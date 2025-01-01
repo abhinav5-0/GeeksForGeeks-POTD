@@ -10,8 +10,9 @@ Given an array of strings, group all strings that are anagrams. The groups must:
 - Contain strings sorted lexicographically within each group.
 
 #### Constraints:
-- \(1 \leq \text{arr.size()} \leq 100\)
-- \(1 \leq \text{arr[i].size()} \leq 10\)
+
+- The size of the array (\( arr \)) is between 1 and 100, inclusive.  
+- The length of each string in the array (\( arr[i] \)) is between 1 and 10, inclusive.
 
 ---
 
