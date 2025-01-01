@@ -19,15 +19,17 @@ Welcome to **Abhinav's** repository for the **GeeksForGeeks Problem of the Day (
 
 GeeksForGeeks-POTD/
 ├── README.md
-├── 2024/
+├── 2025/
 │   ├── January/
-│   │   ├── Problem-Name.md
-│   │   ├── Problem-Name.cpp (or .py)
+│   │   ├── 01(January) 2025/
+│   │   │   ├── Problem-Name.md
+│   │   │   ├── Problem-Name.cpp
 │   ├── February/
+│   │   ├── 01(February) 2025/
+│   │   │   ├── Problem-Name.md
+│   │   │   ├── Problem-Name.cpp
+...
 
-
-
----
 
 ## 🎯 Goals
 
