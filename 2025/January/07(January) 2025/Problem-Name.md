@@ -47,9 +47,9 @@ target = 125
 There is no such pair which sums up to 125.
 
 ### Constraints:
-- \(-10^5 \leq \text{target} \leq 10^5\)
-- \(2 \leq \text{arr.size()} \leq 10^5\)
-- \(-10^5 \leq \text{arr[i]} \leq 10^5\)
+- −105 ≤ target ≤ 105
+- 2 ≤ arr.size() ≤ 105
+- −105 ≤ arr[i] ≤ 105
 
 ### Approach:
 
