@@ -48,7 +48,7 @@ There is no such pair which sums up to 125.
 
 ### Constraints:
 - −105 ≤ target ≤ 105
-- 2 ≤ arr.size() ≤ 105
+-  2 ≤ arr.size() ≤ 105
 - −105 ≤ arr[i] ≤ 105
 
 ### Approach:
