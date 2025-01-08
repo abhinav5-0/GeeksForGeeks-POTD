@@ -137,41 +137,36 @@ int main() {
     }
     return 0;
 }
+```
 
+## Complexity
 
+### Time Complexity:
+- **Sorting:** \( O(nlog n) \)
+- **Two-pointer traversal:** \( O(n^2) \) in the worst case.  
+**Total:** \( O(n^2) \).
 
-Complexity
-Time Complexity:
-Sorting: 
-𝑂
-(
-𝑛
-log
-⁡
-𝑛
-)
-O(nlogn)
-Two-pointer traversal: 
-𝑂
-(
-𝑛
-2
-)
-O(n 
-2
- ) in the worst case.
-Total: 
-𝑂
-(
-𝑛
-2
-)
-O(n 
-2
- ).
-Space Complexity:
-𝑂
-(
-1
-)
-O(1) (In-place sorting and no extra data structures).
+### Space Complexity:
+- \( O(1) \): Sorting is done in-place, and no extra data structures are used.
+
+---
+
+## Edge Cases
+
+1. **Small Array:**  
+   If the array size is less than 3, return `0` (no triangles possible).
+
+2. **All Elements Equal:**  
+   Example: `arr[] = [1, 1, 1, 1]`.  
+   Valid triangles can still be formed.
+
+3. **Large Gaps Between Elements:**  
+   Example: `arr[] = [1, 2, 10]`.  
+   No valid triangles can be formed.
+
+---
+
+## Additional Notes
+
+- This approach efficiently handles arrays with sizes up to the maximum constraint (\( n = 1000 \)).
+- Sorting ensures that checking the triangle inequality becomes straightforward.
