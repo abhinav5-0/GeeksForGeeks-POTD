@@ -42,9 +42,10 @@ arr[] = [5, 3, 4], target = 2
 There is no subarray with sum 2.
 
 ### Constraints
-- \(1 \leq \text{arr.size()} \leq 10^6\)
-- \(0 \leq \text{arr}[i] \leq 10^3\)
-- \(0 \leq \text{target} \leq 10^9\)
+- `1 <= arr.size() <= 10^6`
+- `0 <= arr[i] <= 10^3`
+- `0 <= target <= 10^9`
+
 
 ### Solution
 Below is the C++ implementation of the solution using the sliding window approach:
