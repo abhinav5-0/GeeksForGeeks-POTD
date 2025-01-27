@@ -75,25 +75,6 @@ Queries = [
 7. `PUT 1 2`: Inserts (1, 2), removes least recently used (6, 7). Cache: `{4->5, 1->2}`
 8. `GET 3`: Returns `-1` (not found).
 
-## How to Run
-
-1. Clone the repository:
-    ```bash
-    git clone https://github.com/yourusername/lru-cache.git
-    cd lru-cache
-    ```
-
-2. Compile the code:
-    ```bash
-    g++ -std=c++17 LRUCache.cpp -o LRUCache
-    ```
-
-3. Run the executable:
-    ```bash
-    ./LRUCache
-    ```
-
-4. Provide input as described in the problem statement.
 
 ## Constraints
 
