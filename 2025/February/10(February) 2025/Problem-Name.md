@@ -111,11 +111,5 @@ class Solution {
 
 ---
 
-## **GitHub Repository Instructions**
-To add this to your Git repository:
-```sh
-git add K_Sum_Paths.md
-git commit -m "Added solution for K Sum Paths problem"
-git push origin main
-```
+
 
