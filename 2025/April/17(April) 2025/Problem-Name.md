@@ -63,7 +63,6 @@ edges = [
 ]
 ```
 
-<img src="https://github.com/user-attachments/assets/6ed55a03-6c81-41f0-9e95-7887ac2a6bb3" width="30%">
 
 #### **Output:**  
 ```
@@ -206,7 +205,7 @@ class Solution:
 
 ## **Contribution and Support:**
 
-For discussions, questions, or doubts related to this solution, feel free to connect on LinkedIn: [Any Questions](https://www.linkedin.com/in/patel-hetkumar-sandipbhai-8b110525a/). Let’s make this learning journey more collaborative!
+For discussions, questions, or doubts related to this solution, feel free to connect on LinkedIn: Let’s make this learning journey more collaborative!
 
 ⭐ **If you find this helpful, please give this repository a star!** ⭐
 
@@ -216,6 +215,4 @@ For discussions, questions, or doubts related to this solution, feel free to con
   <h3><b>📍Visitor Count</b></h3>
 </div>
 
-<p align="center">
-  <img src="https://profile-counter.glitch.me/Hunterdii/count.svg" />
-</p>
+
