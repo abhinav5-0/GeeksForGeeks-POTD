@@ -1,29 +1,38 @@
 class Solution {
 public:
-    string clearStars(string s) {
-        int n = s.size();
-        priority_queue<char, vector<char>, greater<char>> pq;  // Min-heap
-        unordered_map<char, vector<int>> m;  // Stores indices of each character
-        vector<bool> v(n, true);  // Marks whether each char in s should be kept
-
+    int longestCommonSum(vector<int> &a1, vector<int> &a2) {
+        int n = a1.size();
+        vector<int> diff(n);
+        
+        // Create difference array
         for (int i = 0; i < n; i++) {
-            if (s[i] == '*') {
-                char temp = pq.top();  // Get smallest char so far
-                pq.pop();
-                int last = m[temp].back();  // Get last occurrence index
-                m[temp].pop_back();
-                v[i] = false;       // Remove '*'
-                v[last] = false;    // Remove corresponding smallest char
+            diff[i] = a1[i] - a2[i];
+        }
+        
+        unordered_map<int, int> prefixSumIndex;
+        int maxLength = 0;
+        int prefixSum = 0;
+        
+        for (int i = 0; i < n; i++) {
+            prefixSum += diff[i];
+            
+            if (prefixSum == 0) {
+                // From start to i, sum is zero
+                maxLength = i + 1;
             } else {
-                pq.push(s[i]);
-                m[s[i]].push_back(i);
+                // If prefixSum seen before, calculate subarray length
+                if (prefixSumIndex.find(prefixSum) != prefixSumIndex.end()) {
+                    int length = i - prefixSumIndex[prefixSum];
+                    if (length > maxLength) {
+                        maxLength = length;
+                    }
+                } else {
+                    // Store earliest index of prefixSum
+                    prefixSumIndex[prefixSum] = i;
+                }
             }
         }
-
-        string result = "";
-        for (int i = 0; i < n; i++) {
-            if (v[i]) result += s[i];
-        }
-        return result;
+        
+        return maxLength;
     }
 };
