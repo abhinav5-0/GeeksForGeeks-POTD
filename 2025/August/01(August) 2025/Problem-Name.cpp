@@ -1,27 +1,13 @@
 class Solution {
 public:
     int countBalanced(vector<string>& arr) {
-        unordered_map<int, int> balanceCount;
-        balanceCount[0] = 1; // Initial balance before any characters
-        int currBalance = 0, result = 0;
-
-        for (const string& s : arr) {
-            for (char ch : s) {
-                if (isVowel(ch))
-                    currBalance += 1;
-                else
-                    currBalance -= 1;
-
-                // If this balance was seen before, it means a balanced substring exists
-                result += balanceCount[currBalance];
-                balanceCount[currBalance]++;
-            }
+        int res = 0, sum = 0;
+        unordered_map<int, int> mp{{0, 1}};
+        for (string& s : arr) {
+            int score = 0;
+            for (char c : s) score += (c == 'a' || c == 'e' || c == 'i' || c == 'o' || c == 'u') ? 1 : -1;
+            res += mp[sum += score]++;
         }
-        return result;
-    }
-
-private:
-    bool isVowel(char ch) {
-        return ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u';
+        return res;
     }
 };
