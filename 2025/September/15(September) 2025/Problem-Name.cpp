@@ -1,21 +1,26 @@
 class Solution {
 public:
     bool stringStack(string &pat, string &tar) {
-        int i = pat.size() - 1;
-        int j = tar.size() - 1;
+        string s = "";
+        int j = 0;
 
-        while (i >= 0 && j >= 0) {
-            if (pat[i] == tar[j]) {
-                // Match found, move both
-                i--;
-                j--;
+        for (char c : pat) {
+            if (j < tar.size() && c == tar[j]) {
+                // Append to build tar
+                s.push_back(c);
+                j++;
             } else {
-                // Skip this pat char (as it would be pushed & popped)
-                i--;
+                // Delete operation (if not empty)
+                if (!s.empty()) {
+                    s.pop_back();
+                    // But we can't re-use c anymore
+                }
+                else {
+                    // Stack empty, ignore this c (delete does nothing)
+                }
             }
         }
 
-        // If we consumed all of tar, it's possible
-        return (j < 0);
+        return s == tar;
     }
 };
