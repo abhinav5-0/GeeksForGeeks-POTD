@@ -1,64 +1,115 @@
-# GeeksForGeeks-POTD
-A repository containing my detailed solutions for the GeeksforGeeks Problem of the Day, written in C++. Each solution includes explanations and optimal approaches!
-# GeeksForGeeks POTD Solutions 🚀
+# 🚀 GeeksForGeeks POTD – Multi-Language Solutions (2026)
 
-Welcome to **Abhinav's** repository for the **GeeksForGeeks Problem of the Day (POTD)**! This repository contains my solutions to GFG's daily coding challenges, organized and explained for easy learning and reference.
+Welcome to **Abhinav Kumar’s** curated repository of **GeeksforGeeks Problem of the Day (POTD)** solutions.
+This repository is maintained with a strong focus on **consistency, clarity, and clean problem-solving**.
 
----
-
-## 📂 Repository Overview
-
-- **Repository Name:** `GeeksForGeeks-POTD`
-- **Languages Used:** C++.
-- **Structure:** Solutions are organized by **year**, **month**, and **problem name**.
-- **Difficulty Levels:** Easy, Medium, Hard.
+> 📌 Started fresh in **January 2026** with a long-term goal of mastering DSA through daily practice.
 
 ---
 
-## 📜 Folder Structure
+## ✨ What This Repository Offers
 
+✔ Daily POTD solutions with **clear explanations**
+✔ **Optimized approaches** with Time & Space Complexity
+✔ Beginner-friendly breakdown of logic
+✔ Clean and structured folders
+✔ Focus on **why an approach works**, not just the code
+
+---
+
+## 🧑‍💻 Languages Used
+
+* **C++** (Primary & consistent)
+* **Java** *(added gradually)*
+* **Python** *(added gradually)*
+
+> 🎯 Designed to help learners across different language preferences.
+
+---
+
+## 📂 Repository Structure
+
+```
 GeeksForGeeks-POTD/
+│
 ├── README.md
-├── 2025/
+│
+├── 2026/
 │   ├── January/
-│   │   ├── 01(January) 2025/
-│   │   │   ├── Problem-Name.md
-│   │   │   ├── Problem-Name.cpp
-│   ├── February/
-│   │   ├── 01(February) 2025/
-│   │   │   ├── Problem-Name.md
-│   │   │   ├── Problem-Name.cpp
-...
-
-
-## 🎯 Goals
-
-- Maintain a detailed collection of POTD solutions from GFG.
-- Share optimized code with clear explanations.
-- Help others in the coding community with learning resources.
+│   │   ├── Day-01-Problem-Name/
+│   │   │   ├── problem.md
+│   │   │   ├── cpp/
+│   │   │   │   └── solution.cpp
+│   │   │   ├── java/
+│   │   │   │   └── Solution.java
+│   │   │   └── python/
+│   │   │       └── solution.py
+│   │   └── ...
+│   └── ...
+```
 
 ---
 
-## 💡 How to Use This Repository?
+## 🧠 What You’ll Learn
 
-1. Browse through the folders for a specific year and month.
-2. Open the `.md` files for problem explanations and solutions.
-3. Use the `.cpp` or `.py` files for code testing and learning.
+* Core **Data Structures & Algorithms**
+* Common problem-solving patterns (Sliding Window, Two Pointers, DP, etc.)
+* Writing **clean, readable, and efficient code**
+* Handling **edge cases** confidently
+
+---
+
+## 🎯 Goals for 2026
+
+* 🔥 Maintain **daily consistency**
+* 📚 Build a **public learning resource**
+* 💼 Strengthen interview & placement preparation
+* 🚀 Improve problem-solving depth, not just speed
+
+---
+
+## 📖 How to Use This Repository
+
+1. Navigate by **Year → Month → Day**
+2. Read `problem.md` for:
+
+   * Problem statement
+   * Approach & explanation
+   * Time & Space Complexity
+3. Explore language-wise solutions
+4. Practice by modifying the code yourself 🚀
 
 ---
 
 ## 🤝 Contributions
 
-Love solving problems? Found a better solution?  
-Feel free to fork this repository, make improvements, and create a pull request. Let's build a better resource together!
+Contributions are welcome 🙌
+
+If you:
+
+* Improve explanations
+* Add a better approach
+* Contribute solutions in other languages
+
+👉 Fork the repository and raise a Pull Request.
 
 ---
 
-## 📧 Contact
+## ⭐ Support
 
-Have any suggestions or feedback?  
-Reach out via [GitHub Issues](https://github.com/abhinav5-0/GeeksForGeeks-POTD/issues).
+If this repository helps you in learning or interview preparation:
 
-Happy Coding! 💻✨  
-**– Abhinav**
+**⭐ Please consider starring the repo — it motivates me to stay consistent throughout 2026!**
 
+---
+
+## 📬 Feedback & Contact
+
+Have suggestions or feedback?
+
+👉 Use **GitHub Issues**:
+[https://github.com/abhinav5-0/GeeksForGeeks-POTD/issues](https://github.com/abhinav5-0/GeeksForGeeks-POTD/issues)
+
+---
+
+Happy Coding 💻✨
