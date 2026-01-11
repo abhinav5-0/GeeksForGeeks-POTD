@@ -1,0 +1,37 @@
+class Solution:
+    def minWindow(self, s1: str, s2: str) -> str:
+        n, m = len(s1), len(s2)
+        min_len = float('inf')
+        start = -1
+
+        for i in range(n):
+            if s1[i] != s2[0]:
+                continue
+
+            p1, p2 = i, 0
+
+            # forward match
+            while p1 < n and p2 < m:
+                if s1[p1] == s2[p2]:
+                    p2 += 1
+                p1 += 1
+
+            if p2 < m:
+                continue
+
+            # backward shrink
+            end = p1 - 1
+            p2 = m - 1
+            while p1 >= i:
+                if s1[p1] == s2[p2]:
+                    p2 -= 1
+                if p2 < 0:
+                    break
+                p1 -= 1
+
+            length = end - p1 + 1
+            if length < min_len:
+                min_len = length
+                start = p1
+
+        return "" if start == -1 else s1[start:start + min_len]
