@@ -1,0 +1,36 @@
+#include <vector>
+#include <climits>
+using namespace std;
+
+class Solution {
+public:
+    vector<int> findClosestPair(vector<int> &arr1, vector<int> &arr2, int x) {
+        int n = arr1.size();
+        int m = arr2.size();
+        
+        int left = 0;
+        int right = m - 1;
+        
+        int minDiff = INT_MAX;
+        vector<int> result(2);
+        
+        while (left < n && right >= 0) {
+            int sum = arr1[left] + arr2[right];
+            int diff = abs(sum - x);
+            
+            if (diff < minDiff) {
+                minDiff = diff;
+                result[0] = arr1[left];
+                result[1] = arr2[right];
+            }
+            
+            if (sum > x) {
+                right--;
+            } else {
+                left++;
+            }
+        }
+        
+        return result;
+    }
+};
