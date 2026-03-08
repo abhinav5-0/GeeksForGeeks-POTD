@@ -1,0 +1,29 @@
+class Solution {
+public:
+    bool pythagoreanTriplet(vector<int>& arr) {
+        int n = arr.size();
+
+        // Square all elements
+        for(int i = 0; i < n; i++)
+            arr[i] = arr[i] * arr[i];
+
+        // Sort array
+        sort(arr.begin(), arr.end());
+
+        // Fix one element as c^2
+        for(int i = n - 1; i >= 2; i--) {
+            int l = 0, r = i - 1;
+
+            while(l < r) {
+                if(arr[l] + arr[r] == arr[i])
+                    return true;
+                else if(arr[l] + arr[r] < arr[i])
+                    l++;
+                else
+                    r--;
+            }
+        }
+
+        return false;
+    }
+};
