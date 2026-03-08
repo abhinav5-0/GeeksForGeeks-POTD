@@ -1,0 +1,28 @@
+class Solution {
+    boolean pythagoreanTriplet(int[] arr) {
+        int n = arr.length;
+
+        // Square all elements
+        for(int i = 0; i < n; i++)
+            arr[i] = arr[i] * arr[i];
+
+        // Sort array
+        Arrays.sort(arr);
+
+        // Fix one element as c^2
+        for(int i = n - 1; i >= 2; i--) {
+            int l = 0, r = i - 1;
+
+            while(l < r) {
+                if(arr[l] + arr[r] == arr[i])
+                    return true;
+                else if(arr[l] + arr[r] < arr[i])
+                    l++;
+                else
+                    r--;
+            }
+        }
+
+        return false;
+    }
+}
