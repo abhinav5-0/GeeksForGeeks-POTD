@@ -1,0 +1,21 @@
+import java.util.*;
+
+class Solution {
+    public List<Integer> commonElements(int[] a, int[] b, int[] c) {
+        int i = 0, j = 0, k = 0;
+        List<Integer> result = new ArrayList<>();
+
+        while (i < a.length && j < b.length && k < c.length) {
+            if (a[i] == b[j] && b[j] == c[k]) {
+                if (result.isEmpty() || result.get(result.size() - 1) != a[i])
+                    result.add(a[i]);
+                i++; j++; k++;
+            }
+            else if (a[i] < b[j]) i++;
+            else if (b[j] < c[k]) j++;
+            else k++;
+        }
+
+        return result;
+    }
+}
